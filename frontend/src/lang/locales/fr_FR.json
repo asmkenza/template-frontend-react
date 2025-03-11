@@ -2,7 +2,8 @@
     "home": "Accueil",
     
     "sidenav.dashboard": "Tableau de bord",
-    "sidenav.dashboard.default": "Défaut",
+    "sidenav.dashboard.rooms": "Chambres",
+    "sidenav.dashboard.rooms_categories": "Catégories de chambres",
     "sidenav.dashboard.analytic": "Analytique",
     "sidenav.dashboard.sales": "Ventes",
 

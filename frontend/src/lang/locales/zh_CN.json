@@ -2,7 +2,8 @@
     "home": "主页",
     
 	"sidenav.dashboard": "仪表板",
-	"sidenav.dashboard.default": "默认",
+    "sidenav.dashboard.rooms": "房间",
+    "sidenav.dashboard.rooms_categories": "房间类别",
     "sidenav.dashboard.analytic": "分析页",
     "sidenav.dashboard.sales": "销售",
     

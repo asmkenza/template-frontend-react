@@ -2,7 +2,8 @@
 	"home": "Home",
 	
 	"sidenav.dashboard": "Dashboard",
-	"sidenav.dashboard.default": "Default",
+	"sidenav.dashboard.rooms": "Rooms",
+	"sidenav.dashboard.rooms_categories": "Rooms Categories",
 	"sidenav.dashboard.analytic": "Analytic",
 	"sidenav.dashboard.sales": "Sales",
 

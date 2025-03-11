@@ -8,6 +8,8 @@ export const AUTH_PREFIX_PATH = '/auth';
 export const REDIRECT_URL_KEY = 'redirect'
 export const AUTHENTICATED_ENTRY = `${APP_PREFIX_PATH}/dashboards/default`;
 export const UNAUTHENTICATED_ENTRY = '/login'
+export const ROOMS = `${APP_PREFIX_PATH}/rooms`;
+export const ROOMSCATEGORIES = `${APP_PREFIX_PATH}/rooms-categories`;
 
 export const THEME_CONFIG = {
 	navCollapsed: false,

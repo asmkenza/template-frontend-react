@@ -2,7 +2,8 @@
     "home": "ホームページ",
     
     "sidenav.dashboard": "ダッシュボード",
-    "sidenav.dashboard.default": "既定",
+    "sidenav.dashboard.rooms": "部屋",
+    "sidenav.dashboard.rooms_categories": "部屋のカテゴリー",
     "sidenav.dashboard.analytic": "分析",
     "sidenav.dashboard.sales": "売り上げ",
 
