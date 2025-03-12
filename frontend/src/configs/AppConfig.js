@@ -10,6 +10,7 @@ export const AUTHENTICATED_ENTRY = `${APP_PREFIX_PATH}/dashboards/default`;
 export const UNAUTHENTICATED_ENTRY = '/login'
 export const ROOMS = `${APP_PREFIX_PATH}/rooms`;
 export const ROOMSCATEGORIES = `${APP_PREFIX_PATH}/rooms-categories`;
+export const HOTELREGISTER = `${APP_PREFIX_PATH}/hotel-register-page`;
 
 export const THEME_CONFIG = {
 	navCollapsed: false,

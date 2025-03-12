@@ -6,10 +6,14 @@ import { SearchOutlined } from '@ant-design/icons';
 
 
 const CustomTable = ({data,columns}) => {
-    
+
   const [searchText, setSearchText] = useState('');
   const [searchedColumn, setSearchedColumn] = useState('');
   const searchInput = useRef(null);
+
+
+
+
 
   const getColumnSearchProps = dataIndex => ({
     filterDropdown: ({ setSelectedKeys, selectedKeys, confirm, clearFilters }) => (
@@ -71,8 +75,19 @@ const CustomTable = ({data,columns}) => {
     setSearchText('');
   };
 
+  const searchableColumns = columns.map(col => {
+    if (col.searchable) {
+      return {
+        ...col,
+        ...getColumnSearchProps(col.dataIndex)
+      };
+    }
+    return col;
+  });
 
-  return <Table columns={columns} dataSource={data} getColumnSearchProps={getColumnSearchProps}/>;
+
+  
+  return <Table columns={searchableColumns} dataSource={data} />;
 };
 
 export default CustomTable;

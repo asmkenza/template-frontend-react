@@ -1,5 +1,5 @@
 import React from 'react'
-import { AUTH_PREFIX_PATH, APP_PREFIX_PATH, ROOMS, ROOMSCATEGORIES } from 'configs/AppConfig'
+import { AUTH_PREFIX_PATH, APP_PREFIX_PATH, ROOMS, ROOMSCATEGORIES, HOTELREGISTER } from 'configs/AppConfig'
 
 
 
@@ -36,5 +36,10 @@ export const protectedRoutes = [
         key: 'rooms-categories',
         path: `${ROOMSCATEGORIES}`,
         component: React.lazy(() => import('views/app-views/dashboards/roomsCategories/RoomsCategories')),
+    },
+    {
+        key: 'hotel-register',
+        path: `${HOTELREGISTER}`,
+        component: React.lazy(() => import('views/register-hotel-page/RegisterHotelPage')),
     }
 ]
