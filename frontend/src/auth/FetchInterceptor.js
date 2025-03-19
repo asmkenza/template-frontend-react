@@ -9,7 +9,8 @@ const unauthorizedCode = [400, 401, 403]
 
 const service = axios.create({
   baseURL: API_BASE_URL,
-  timeout: 60000
+  timeout: 60000,
+  withCredentials: true
 })
 
 // Config

@@ -29,7 +29,7 @@ router.get("/",authToken,adminfunc)
 
 //Routes Room Categories 
 router.post("/room-categories",authToken,validate(createCategoryValidator),createCategory)
-router.get("/room-categories-all",authToken,getCategories)
+router.get("/room-categories-all",getCategories)
 router.get("/room-categories/:id",authToken,getCategory)
 router.delete("/room-categories/:id",authToken,deleteCategory)
 router.put("/room-categories/:id",authToken,validate(updateCategoryValidator),updateCategory)

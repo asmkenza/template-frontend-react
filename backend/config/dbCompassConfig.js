@@ -6,7 +6,7 @@ dotenv.config()
 const dbCompassConnect = async ()=>{
  try {
     await mongoose.connect(process.env.MONGO_URI_COMPASS);
-    console.log("connected to db");
+    console.log("connected to compass db");
     
     
  } catch (error) {

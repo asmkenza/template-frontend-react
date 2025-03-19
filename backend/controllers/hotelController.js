@@ -1,10 +1,19 @@
 import Admin from "../models/adminModel.js";
 import Hotel from "../models/hotelModel.js"
 import { generateAccessToken } from "./authController.js";
+import upload from "../middlewares/uploadMiddleware.js";
 
-export const createHotel=async (req,res)=>{
 
-    const {nom,logo,photo,emplacement}=req.body;
+export const createHotel= [
+
+    upload.fields([{ name: 'photo' }, { name: 'logo' }]),
+    async (req,res)=>{
+ 
+    const { nom, emplacement } = req.body;
+    const photoUrl = req.files['photo'] ? req.files['photo'][0].path : null;
+    const logoUrl = req.files['logo'] ? req.files['logo'][0].path : null;
+
+
     const adminId = req.admin.id
 
     const admin = await Admin.findById(adminId)
@@ -17,8 +26,8 @@ export const createHotel=async (req,res)=>{
     try {
         const hotel = await Hotel.create({
             nom,
-            logo,
-            photo,
+            logo: logoUrl,
+            photo: photoUrl,
             emplacement,
             refAdmin: adminId 
         });
@@ -37,3 +46,4 @@ export const createHotel=async (req,res)=>{
     }
   }
 
+];

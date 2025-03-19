@@ -27,7 +27,7 @@
 //toutes les catégories de l'hotel
 export const getCategories = async (req, res) => {
   
-  const hotelId=req.admin.refHotel
+  const hotelId= "67db40465c519d5288027a63"
 
     try {
       const categories = await RoomCategory.find({refHotel:hotelId});

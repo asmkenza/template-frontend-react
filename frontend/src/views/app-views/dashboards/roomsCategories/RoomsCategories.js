@@ -1,35 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import CustomTable from 'components/shared-components/Table';
 import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
-import { Button, Modal, Input } from 'antd';
-
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    slug: 'john-brown',
-    created_at: 'New York No. 1 Lake Park',
-  },
-  {
-    key: '2',
-    name: 'Carlos Los',
-    slug: 'carlos-los',
-    created_at: 'New York No. 1 Lake Park',
-  },
-  {
-    key: '3',
-    name: 'Zed Bres',
-    slug: 'zed-bres',
-    created_at: 'New York No. 1 Lake Park',
-  }
-];
+import { Button, Modal, Input, message } from 'antd';
+import { startLoading, getCategoriesSuccess, hasError } from 'store/slices/roomCategoriesSlice';
+import RoomCategoryService from 'services/RoomCategoriesService';
 
 export const RoomsCategories = () => {
+  const dispatch = useDispatch();
+  const { categories, loading } = useSelector((state) => state.roomCategory);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingRow, setEditingRow] = useState(null);
   const [form, setForm] = useState({
     name: '',
   });
+
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+
+
+  const fetchCategories = async () => {
+    dispatch(startLoading());
+    try {
+      const data = await RoomCategoryService.getCategories();
+      dispatch(getCategoriesSuccess(data));
+    } catch (error) {
+      dispatch(hasError(error.message));
+      message.error(error.message);
+    }
+  };
 
   const showModal = () => {
     setEditingRow(null);
@@ -49,10 +50,8 @@ export const RoomsCategories = () => {
 
   const handleOk = () => {
     if (editingRow) {
-      // Handle update logic here
       console.log('Update row:', editingRow, form);
     } else {
-      // Handle add new logic here
       console.log('Add new row:', form);
     }
     setIsModalOpen(false);
@@ -72,24 +71,17 @@ export const RoomsCategories = () => {
 
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
+      title: 'id',
+      dataIndex: '_id',
       key: 'name',
       width: '30%',
       searchable: true,
     },
     {
-      title: 'Slug',
-      dataIndex: 'slug',
-      key: 'slug',
-      width: '20%',
-      searchable: true,
-    },
-    {
-      title: 'Created At',
-      dataIndex: 'created_at',
-      key: 'created_at',
-      width: '20%',
+      title: 'name',
+      dataIndex: 'name',
+      key: 'name',
+      width: '30%',
       searchable: true,
     },
     {
@@ -123,7 +115,7 @@ export const RoomsCategories = () => {
           <Input name="name" value={form.name} onChange={handleInputChange} placeholder="Enter category name" />
         </div>
       </Modal>
-      <CustomTable data={data} columns={columns} />
+      <CustomTable loading={loading} data={categories} columns={columns} />
     </>
   );
 };
