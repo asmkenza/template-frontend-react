@@ -41,5 +41,8 @@ export const protectedRoutes = [
         key: 'hotel-register',
         path: `${HOTELREGISTER}`,
         component: React.lazy(() => import('views/register-hotel-page/RegisterHotelPage')),
+        meta: {
+            blankLayout: true
+        }
     }
 ]

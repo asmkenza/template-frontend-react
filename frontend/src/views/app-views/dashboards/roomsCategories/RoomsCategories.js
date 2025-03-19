@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 import CustomTable from 'components/shared-components/Table';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { EditOutlined, DeleteOutlined, PlusOutlined } from '@ant-design/icons';
 import { Button, Modal, Input } from 'antd';
-
-
-
 
 const data = [
   {
@@ -111,7 +108,7 @@ export const RoomsCategories = () => {
 
   return (
     <>
-      <Button type="primary" onClick={showModal} style={{ marginBottom: 16, float: 'right' }}>
+      <Button type="primary" onClick={showModal} icon={<PlusOutlined />} style={{ marginBottom: 16, float: 'right' }}>
         New Room Category
       </Button>
       <Modal
