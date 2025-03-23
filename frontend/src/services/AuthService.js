@@ -14,7 +14,7 @@ AuthService.login = function (data) {
 AuthService.register = function (data) {
 	data.nom="asmani";
 	data.prenom="kenza";
-	data.numtel="0666666681";
+	data.numtel="0666666683";
 
 	return fetch({
 		url: `${env.API_ENDPOINT_URL}admin/register`,
