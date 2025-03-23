@@ -188,6 +188,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { AUTH_TOKEN } from 'constants/AuthConstant';
 import AuthService from 'services/AuthService';
+import {notification} from 'antd';
 
 export const initialState = {
     loading: false,
@@ -201,8 +202,9 @@ export const signIn = createAsyncThunk('auth/login', async (data, { rejectWithVa
     const { email, password } = data;
     try {
         const response = await AuthService.login({ email, password });
-        const token = response.data.token;
+        const token = response.accessToken;
         localStorage.setItem(AUTH_TOKEN, token);
+        notification.success({message : response.message});
         return token;
     } catch (err) {
         return rejectWithValue(err.response?.data?.message || 'Error');
@@ -213,8 +215,9 @@ export const signUp = createAsyncThunk('auth/register', async (data, { rejectWit
     const { email, password } = data;
     try {
         const response = await AuthService.register({ email, password });
-        const token = response.data.token;
+        const token = response.accessToken;
         localStorage.setItem(AUTH_TOKEN, token);
+        notification.success({message : response.message});
         return token;
     } catch (err) {
         return rejectWithValue(err.response?.data?.message || 'Error');
@@ -222,9 +225,11 @@ export const signUp = createAsyncThunk('auth/register', async (data, { rejectWit
 });
 
 export const signOut = createAsyncThunk('auth/logout', async () => {
-    try {
-        await AuthService.logout();
+      const accessToken= localStorage.getItem(AUTH_TOKEN);
+        try {    
+        const response = await AuthService.logout({accessToken});
         localStorage.removeItem(AUTH_TOKEN);
+        notification.success({message : response.message});
         return true;
     } catch (err) {
         return false;
@@ -314,7 +319,7 @@ export const authSlice = createSlice({
             })
             .addCase(signUp.fulfilled, (state, action) => {
                 state.loading = false;
-                state.redirect = '/';
+                state.redirect = '/app/hotel-register-page';
                 state.token = action.payload;
             })
             .addCase(signUp.rejected, (state, action) => {

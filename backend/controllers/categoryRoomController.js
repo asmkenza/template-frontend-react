@@ -40,6 +40,12 @@ export const getCategories = async (req, res) => {
 
 
 
+
+
+
+
+
+
 //une seule catégorie de l'hotel
 export const getCategory = async (req,res)=>{
 const {id}=req.params
@@ -69,7 +75,7 @@ try {
 //Suppression
  export const deleteCategory = async(req,res)=>{
     const {id}= req.params
-    const hotelId = req.admin.refHotel
+    const hotelId = "67db40465c519d5288027a63"
 
     try {
 

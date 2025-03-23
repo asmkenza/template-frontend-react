@@ -33,9 +33,11 @@ export const register = async (req,res)=>{
         const hashedpwd = await  bcrypt.hash(password,salt)
 
         const admin = new Admin({nom, prenom ,email ,numtel, password:hashedpwd})
+        const accessToken = generateAccessToken(admin);
+        admin.accessToken = accessToken;
         await admin.save()
 
-        res.status(201).json({message:'admin created'})
+        res.status(201).json({message:'admin created',accessToken})
        
         
     } catch (error) {
@@ -61,10 +63,10 @@ export const login = async (req,res)=>{
         const accessToken = generateAccessToken(admin);
         const refreshToken = generateRefreshToken(admin);
 
-        admin.refreshToken = refreshToken ;
+        admin.accessToken = accessToken ;
         await admin.save()
-
-       res.json({accessToken,refreshToken})
+       
+       res.json({message:'admin created successfully',accessToken,refreshToken})
 
        ///res.status(200).json({message:"login successful!"})
 
@@ -118,32 +120,32 @@ export const refreshToken = async (req,res)=>{
 export const logout = async (req,res)=>{
     try {
       
-        const {refreshToken}=req.body
+        const {accessToken}=req.body
+        console.log(req.body); 
 
-        if (!refreshToken){
-            return res.status(403).json({message:"No refresh token"})
+        if (!accessToken){
+            console.log("No refresh token");
+            return res.status(403).json({message:"No access token"})
         }
 
 
-       const admin = await Admin.findOne({refreshToken})
+       const admin = await Admin.findOne({accessToken})
 
        if(!admin){
-        return res.status(403).json({message:"No admin found with that refreshToken"})
+        console.log("No admin found with that accessToken");
+        return res.status(403).json({message:"No admin found with that accessToken"})
        }
 
 
-       admin.refreshToken=null
+       admin.accessToken=null
        admin.tokenInvalidatedAt = new Date();
 
        await admin.save()
     
        res.status(200).json({message:'Successful Logout ! '})
-
       
-        
     } catch (error) {
         console.log(error);
         res.status(500).json({message:'internal server error'})
-        
     }
 }

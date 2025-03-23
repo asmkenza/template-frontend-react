@@ -1,14 +1,25 @@
 import fetch from 'auth/FetchInterceptor'
-import { APP_PREFIX_PATH } from 'configs/AppConfig'
-
+import { env } from 'configs/EnvironmentConfig'
 
 const RoomCategoryService = {}
 
 RoomCategoryService.getCategories = () => {
   return fetch({
-    url: `${APP_PREFIX_PATH}/room-categories-all`,
+    url: `${env.API_ENDPOINT_URL}admin/room-categories-all`,
     method: 'get'
   })
 }
+
+
+RoomCategoryService.deleteCategory = (id) => {
+  return fetch({
+    url: `${env.API_ENDPOINT_URL}admin/room-categories/${id}`,
+    method: 'delete',
+  });
+};
+
+
+
+
 
 export default RoomCategoryService

@@ -1,27 +1,33 @@
 import fetch from 'auth/FetchInterceptor'
+import { env } from 'configs/EnvironmentConfig'
 
 const AuthService = {}
 
 AuthService.login = function (data) {
 	return fetch({
-		url: '/auth/login',
+		url: `${env.API_ENDPOINT_URL}admin/login`,
 		method: 'post',
 		data: data
 	})
 }
 
 AuthService.register = function (data) {
+	data.nom="asmani";
+	data.prenom="kenza";
+	data.numtel="0666666681";
+
 	return fetch({
-		url: '/auth/register',
+		url: `${env.API_ENDPOINT_URL}admin/register`,
 		method: 'post',
 		data: data
 	})
 }
 
-AuthService.logout = function () {
+AuthService.logout = function (data) {
 	return fetch({
-		url: '/auth/logout',
-		method: 'post'
+		url: `${env.API_ENDPOINT_URL}admin/logout`,
+		method: 'post',
+		data: data
 	})
 }
 

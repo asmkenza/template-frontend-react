@@ -56,8 +56,10 @@ export const RegisterForm = (props) => {
 	}
 
 	useEffect(() => {
+		console.log(token)
 		if (token !== null && allowRedirect) {
-			navigate(redirect)
+			console.log('redirecting to:', redirect)
+			navigate('/app/hotel-register-page')
 		}
 		if (showMessage) {
 			const timer = setTimeout(() => hideAuthMessage(), 3000)
@@ -65,7 +67,7 @@ export const RegisterForm = (props) => {
 				clearTimeout(timer);
 			};
 		}
-	});
+	},[token, allowRedirect, redirect, showMessage, hideAuthMessage, navigate]);
 	
 	return (
 		<>

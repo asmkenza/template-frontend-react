@@ -35,7 +35,7 @@ const adminSchema = mongoose.Schema({
         ref:'Hotel',
         default:null
     },
-    refreshToken:{
+    accessToken:{
         type:String
     },
     tokenInvalidatedAt: { 
